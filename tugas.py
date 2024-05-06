@@ -24,8 +24,8 @@ if uploaded_file is None:
     # Chart
     st.markdown(f"<h2 style='text-align: center;'>Important Attributes for {selected_sheet}</h2>", unsafe_allow_html=True)
     chart = alt.Chart(feature_importance_data_sorted).mark_bar().encode(
-        y=alt.Y('attribut_names', sort='-x'),  # Sorting by feature importance descending
-        x='importance_value'
+        y=alt.Y('feature_name', sort='-x'),
+        x='feature_importance'
     ).properties(
         width=600,
         height=400
@@ -59,7 +59,7 @@ if uploaded_file is not None:
         st.markdown(f"<h1 style='text-align: center;'>Football Manager Player Analyzer</h1>", unsafe_allow_html=True)
         num_players = len(selected_players)
         cols = st.columns(num_players)
-        colors = ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b']  # Example colors
+        colors = ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b']
         for i, selected_player in enumerate(selected_players):
             selected_data = filtered_df[filtered_df['Name'] == selected_player]
             with cols[i]:
