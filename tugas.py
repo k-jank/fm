@@ -1,9 +1,9 @@
 import streamlit as st
 import pandas as pd
-from catboost import CatBoostClassifier
 import altair as alt
 import numpy as np
 import matplotlib.pyplot as plt
+from catboost import CatBoostClassifier
 
 # Load the trained model
 model = CatBoostClassifier()
