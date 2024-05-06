@@ -32,7 +32,7 @@ if uploaded_file is None:
     )
 
     st.altair_chart(chart, use_container_width=True)
-
+    
 if uploaded_file is not None:
     # Reading data
     data = pd.read_excel(uploaded_file)
