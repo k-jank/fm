@@ -24,8 +24,8 @@ if uploaded_file is None:
     # Chart
     st.markdown(f"<h2 style='text-align: center;'>Important Attributes for {selected_sheet}</h2>", unsafe_allow_html=True)
     chart = alt.Chart(feature_importance_data_sorted).mark_bar().encode(
-        y=alt.Y('feature_name', sort='-x'),  # Sorting by feature importance descending
-        x='feature_importance'
+        y=alt.Y('name', sort='-x'),  # Sorting by feature importance descending
+        x='importance'
     ).properties(
         width=600,
         height=400
