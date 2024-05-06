@@ -1,9 +1,9 @@
 import streamlit as st
 import pandas as pd
-import numpy as np
-import altair as alt
-import matplotlib.pyplot as plt
 from catboost import CatBoostClassifier
+import altair as alt
+import numpy as np
+import matplotlib.pyplot as plt
 
 # Load the trained model
 model = CatBoostClassifier()
@@ -71,7 +71,7 @@ if uploaded_file is not None:
                 st.markdown(f"<div style='text-align: center; padding: 10px; margin-bottom: 10px; border-radius: 5px; background-color: {colors[i % len(colors)]}; color: white;'><b>CA</b><br>{selected_data['CA'].iloc[0]}</div>", unsafe_allow_html=True)
                 st.markdown(f"<div style='text-align: center; padding: 10px; margin-bottom: 10px; border-radius: 5px; background-color: {colors[i % len(colors)]}; color: white;'><b>PA</b><br>{selected_data['PA'].iloc[0]}</div>", unsafe_allow_html=True)
 
-        # Plot
+        # Generate radar plot
         fig, ax = plt.subplots(figsize=(6, 6), subplot_kw=dict(polar=True))
         num_cols = len(filtered_df.columns) - 7 
         angles = np.linspace(0, 2 * np.pi, num_cols, endpoint=False).tolist()
