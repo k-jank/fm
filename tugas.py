@@ -34,7 +34,7 @@ if uploaded_file is None:
     st.altair_chart(chart, use_container_width=True)
 
 if uploaded_file is not None:
-    # Membaca data dari file Excel
+    # Reading data
     data = pd.read_excel(uploaded_file)
     data = data[model.feature_names_]
 
@@ -44,16 +44,16 @@ if uploaded_file is not None:
 
     # Data
     fm = pd.read_excel(uploaded_file)
-    hasil_prediksi_df = pd.DataFrame(fm)
-    hasil_prediksi_df['Best Role'] = predictions_flat
+    predict_df = pd.DataFrame(fm)
+    predict_df['Best Role'] = predictions_flat
 
-     # Display dropdown
-    selected_position = st.sidebar.selectbox("Choose Player Role:", sorted(hasil_prediksi_df['Best Role'].unique()))
-    filtered_df = hasil_prediksi_df[hasil_prediksi_df['Best Role'] == selected_position]
+    # Display dropdown
+    selected_position = st.sidebar.selectbox("Choose Player Role:", sorted(predict_df['Best Role'].unique()))
+    filtered_df = predict_df[predict_df['Best Role'] == selected_position]
     unique_name = sorted(filtered_df['Name'].unique())
     selected_players = st.sidebar.multiselect("Players:", unique_name)
 
-    # Handle comparison between selected players
+    # Handle comparison
     if selected_players:
             # Display player information for all selected players
         st.markdown(f"<h1 style='text-align: center;'>Football Manager Player Analyzer</h1>", unsafe_allow_html=True)
