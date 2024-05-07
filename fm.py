@@ -14,6 +14,7 @@ uploaded_file = st.sidebar.file_uploader("Upload Excel file to analyze players",
 
 if uploaded_file is None:
     st.image("fm.png", use_column_width=True)
+    st.title("In What Role Does He Play(?)")
     
 if uploaded_file is not None:
     # Reading data
