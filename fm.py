@@ -7,7 +7,7 @@ from catboost import CatBoostClassifier
 
 # Load the trained model
 model = CatBoostClassifier()
-model.load_model('catboost_model.bin')
+model.load_model('catboost.bin')
 
 # Uploading Excel file
 uploaded_file = st.sidebar.file_uploader("Upload Excel file to analyze players", type=["xlsx", "xls"])
