@@ -13,8 +13,8 @@ model.load_model('catboost.bin')
 uploaded_file = st.sidebar.file_uploader("Upload Excel file to analyze players", type=["xlsx", "xls"])
 
 if uploaded_file is None:
+    st.markdown("<h1 style='text-align: center;'>In What Role Does He Play(?)</h1>", unsafe_allow_html=True)
     st.image("fm.png", use_column_width=True)
-    st.title("In What Role Does He Play(?)")
     
 if uploaded_file is not None:
     # Reading data
