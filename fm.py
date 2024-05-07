@@ -13,25 +13,7 @@ model.load_model('catboost.bin')
 uploaded_file = st.sidebar.file_uploader("Upload Excel file to analyze players", type=["xlsx", "xls"])
 
 if uploaded_file is None:
-    xls = pd.ExcelFile('feature.xlsx')
-    sheet_names_upper = [sheet.upper() for sheet in xls.sheet_names]
-    sheet_names_upper.sort() 
-    selected_sheet = st.sidebar.selectbox("Important Attributes for Role:", [sheet.upper() for sheet in sheet_names_upper])
-    selected_sheet_lower = xls.sheet_names[sheet_names_upper.index(selected_sheet)].lower()
-    feature_importance_data = pd.read_excel('feature.xlsx', sheet_name=selected_sheet_lower)
-    feature_importance_data_sorted = feature_importance_data.sort_values(by='feature_importance', ascending=False)
-
-    # Chart
-    st.markdown(f"<h2 style='text-align: center;'>Important Attributes for {selected_sheet}</h2>", unsafe_allow_html=True)
-    chart = alt.Chart(feature_importance_data_sorted).mark_bar().encode(
-        y=alt.Y('feature_name', sort='-x'),
-        x='feature_importance'
-    ).properties(
-        width=600,
-        height=400
-    )
-
-    st.altair_chart(chart, use_container_width=True)
+    st.image("fm.png", use_column_width=True)
     
 if uploaded_file is not None:
     # Reading data
