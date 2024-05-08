@@ -74,3 +74,6 @@ if uploaded_file is not None:
         ax.set_title('Player Attributes', pad=20)
         st.pyplot(fig)
         plt.close(fig) 
+
+    else:
+        st.image("fm.png", use_column_width=True)
