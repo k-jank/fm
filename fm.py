@@ -12,8 +12,21 @@ model.load_model('catboost.bin')
 # Uploading Excel file
 uploaded_file = st.sidebar.file_uploader("Upload Excel file to analyze players", type=["xlsx", "xls"])
 
+# Define a function to load and display from a file
+def display_image_from_file(file_path):
+    with open(file_path, "rb") as f:
+        image = f.read()
+    st.image(image, use_column_width=True)
+
 if uploaded_file is None:
-    st.image("fm.png", use_column_width=True)
+    images_dir = "att"
+    image_files = os.listdir(images_dir)
+    image_names = [file.split('.')[0] for file in image_files]
+    selected_image_name = st.sidebar.selectbox("Select Role", image_names)
+    
+    st.markdown(f"<h1 style='text-align: center;'>Football Manager Player Analyzer</h1>", unsafe_allow_html=True)
+    selected_image_path = os.path.join(images_dir, selected_image_name + ".png")
+    display_image_from_file(selected_image_path)
     
 if uploaded_file is not None:
     # Reading data
