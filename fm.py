@@ -22,7 +22,7 @@ def display_image_from_file(file_path):
 if uploaded_file is None:
     images_dir = "att"
     image_files = os.listdir(images_dir)
-    image_names = [file.split('.')[0] for file in image_files]
+    image_names = sorted([file.split('.')[0] for file in image_files])
     selected_image_name = st.sidebar.selectbox("Select Role", image_names)
     
     st.markdown(f"<h1 style='text-align: center;'>Football Manager Player Analyzer</h1>", unsafe_allow_html=True)
