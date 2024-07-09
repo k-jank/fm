@@ -1,10 +1,10 @@
 import streamlit as st
 import pandas as pd
+from catboost import CatBoostClassifier
 import altair as alt
 import numpy as np
 import matplotlib.pyplot as plt
 import os
-from catboost import CatBoostClassifier
 
 # Load the trained model
 model = CatBoostClassifier()
@@ -13,22 +13,25 @@ model.load_model('catboost.bin')
 # Uploading Excel file
 uploaded_file = st.sidebar.file_uploader("Upload Excel file to analyze players", type=["xlsx", "xls"])
 
-# Define a function to load and display from a file
+# Define a function to load and display the image from a file
 def display_image_from_file(file_path):
     with open(file_path, "rb") as f:
         image = f.read()
     st.image(image, use_column_width=True)
 
 if uploaded_file is None:
-    images_dir = "att"
+    # If no file is uploaded, display a dropdown menu
+    images_dir = "att"  # Directory where your images are stored
     image_files = os.listdir(images_dir)
-    image_names = sorted([file.split('.')[0] for file in image_files])
+    image_names = [file.split('.')[0] for file in image_files]
     selected_image_name = st.sidebar.selectbox("Select Role", image_names)
     
+    
+    # Display selected image
     st.markdown(f"<h1 style='text-align: center;'>Football Manager Player Analyzer</h1>", unsafe_allow_html=True)
     selected_image_path = os.path.join(images_dir, selected_image_name + ".png")
     display_image_from_file(selected_image_path)
-    
+
 if uploaded_file is not None:
     # Reading data
     data = pd.read_excel(uploaded_file)
@@ -40,22 +43,22 @@ if uploaded_file is not None:
 
     # Data
     fm = pd.read_excel(uploaded_file)
-    predict_df = pd.DataFrame(fm)
-    predict_df['Best Role'] = predictions_flat
+    hasil_prediksi_df = pd.DataFrame(fm)
+    hasil_prediksi_df['Best Role'] = predictions_flat
 
     # Display dropdown
-    selected_position = st.sidebar.selectbox("Choose Player Role:", sorted(predict_df['Best Role'].unique()))
-    filtered_df = predict_df[predict_df['Best Role'] == selected_position]
+    selected_position = st.sidebar.selectbox("Choose Player Role:", sorted(hasil_prediksi_df['Best Role'].unique()))
+    filtered_df = hasil_prediksi_df[hasil_prediksi_df['Best Role'] == selected_position]
     unique_name = sorted(filtered_df['Name'].unique())
     selected_players = st.sidebar.multiselect("Players:", unique_name)
 
-    # Handle comparison
+    # Handle comparison between selected players
     if selected_players:
-            # Display player information for all selected players
+        # Display player information for all selected players
         st.markdown(f"<h1 style='text-align: center;'>Football Manager Player Analyzer</h1>", unsafe_allow_html=True)
         num_players = len(selected_players)
         cols = st.columns(num_players)
-        colors = ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b']
+        colors = ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b']  # Example colors
         for i, selected_player in enumerate(selected_players):
             selected_data = filtered_df[filtered_df['Name'] == selected_player]
             with cols[i]:
@@ -67,7 +70,7 @@ if uploaded_file is not None:
                 st.markdown(f"<div style='text-align: center; padding: 10px; margin-bottom: 10px; border-radius: 5px; background-color: {colors[i % len(colors)]}; color: white;'><b>CA</b><br>{selected_data['CA'].iloc[0]}</div>", unsafe_allow_html=True)
                 st.markdown(f"<div style='text-align: center; padding: 10px; margin-bottom: 10px; border-radius: 5px; background-color: {colors[i % len(colors)]}; color: white;'><b>PA</b><br>{selected_data['PA'].iloc[0]}</div>", unsafe_allow_html=True)
 
-        # Plot
+        # Generate radar plot
         fig, ax = plt.subplots(figsize=(6, 6), subplot_kw=dict(polar=True))
         num_cols = len(filtered_df.columns) - 7 
         angles = np.linspace(0, 2 * np.pi, num_cols, endpoint=False).tolist()
