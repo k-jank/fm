@@ -1,6 +1,3 @@
 catboost
 openpyxl
-pandas
-plotly
-streamlit
-pandas-datareader
+
