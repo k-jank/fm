@@ -1,3 +1,2 @@
+catboost
 openpyxl
-CatBoost
-numpy==1.26.4
