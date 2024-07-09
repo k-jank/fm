@@ -1,3 +1,6 @@
 catboost
 openpyxl
-pip==24.1.2
+pandas
+plotly
+streamlit
+pandas-datareader
