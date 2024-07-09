@@ -1,2 +1,2 @@
-catboost==1.2.5
+catboost
 openpyxl
