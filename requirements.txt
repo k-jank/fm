@@ -1,2 +1,3 @@
-catboost --upgrade
+catboost
 openpyxl
+pip install --upgrade pip
