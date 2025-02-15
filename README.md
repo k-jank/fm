@@ -7,5 +7,7 @@ Easy Report       : https://drive.google.com/file/d/1hwJOQRr1-XLdWw5-YiQOPzHCrjZ
 
 Example Excel file: https://docs.google.com/spreadsheets/d/1z4e9-oksqi6mDC8_98utntEPjNGOx9oy/
 
+Dashboard: https://bdzfvt5knhvazzvhbe2knm.streamlit.app/
+
 https://github.com/k-jank/fm/assets/157026427/0f489971-22db-4b22-86bb-7d4af246c24a
 
